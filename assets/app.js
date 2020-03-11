@@ -2,13 +2,6 @@ var topics = ["greta van fleet", "kaleo", "tool", "metallica", "mitch king", "th
 
 for (var i = 0; i < topics.length; i++) {
    $("#buttons").append("<button data-band = ' " + topics[i] + " ' class = 'newbutton'>" + topics[i] + "</button>");
-
-    // template literals ``
-
-    // $("#buttons").append(`
-    // <button data-band ='${topics[i]}' class = 'newbutton'> ${topics[i]} </button>
-    // `);
-
 }
 
 $(".submit").on("click", function() {
@@ -29,38 +22,35 @@ $(document).on("click", ".newbutton", function() {
                 var bandDiv = $("<div>");
                 var p = $("<p>").text("Rating: " + response.data[i].rating);
                 var bandImage = $("<img class = 'gif'>");
-                bandImage.attr("src", response.data[i].images.fixed_height.url);
+                bandImage.attr("src", response.data[i].images.fixed_height_still.url);
+                bandImage.attr("data-animate", response.data[i].images.fixed_height.url);
+                bandImage.attr("data-still", response.data[i].images.fixed_height_still.url);
+                bandImage.attr("data-state", "still");
                 bandDiv.append(bandImage);
+                // var bandImage = $("<img class = 'gif'>");
+                // bandImage.attr("src", response.data[i].images.fixed_height_still.url);
+                // bandImage.attr("data-animate", response.data[i].images.fixed_height.url);
+                // bandImage.attr("data-still", response.data[i].images.fixed_height_still.url);
+                // bandImage.attr("data-state", "still");
+                // bandImage.attr("data-state", "animate", response.data[i].images.fixed_height.url);
+                // bandDiv.append(bandImage);
                 $("#bands").append(bandDiv).append(p);
+                
+                
+                
+            
         }
-
-
-
-        //     var bandDiv = $(`
-        //     <div>
-        //     <p>Rating: ${ response.data[i].rating}</p>
-        //     <img class = "gif" src="${response.data[i].images.fixed_height.url}">
-        //     </div>
-        //     `)
-        //     $("#bands").append(bandDiv);
     })
-
-    // $(".gif").click(function() {
-    //     var state = $(this).attr("data-state");
-
-    //     if (state === "still") {
-    //         $(this).attr("src", $(this).attr("data-animate"));
-    //         $(this).attr("data-state", "animate");
-    //     }
-    //     if (state === "animate") {
-    //         $(this).attr("src", $(this).attr("data-still"));
-    //         $(this).attr("data-state", "still");
-    //     }
-    // })
-
-    
-
-
 })
 
-
+$(document).on("click", ".gif", function () {
+    console.log("gif clicked");
+    var state = $(this).attr("data-state");
+    if (state === "still") {
+      $(this).attr("src", $(this).attr("data-animate"));
+      $(this).attr("data-state", "animate");
+    } else {
+      $(this).attr("src", $(this).attr("data-still"));
+      $(this).attr("data-state", "still");
+    }
+})    
