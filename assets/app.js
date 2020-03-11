@@ -27,24 +27,12 @@ $(document).on("click", ".newbutton", function() {
                 bandImage.attr("data-still", response.data[i].images.fixed_height_still.url);
                 bandImage.attr("data-state", "still");
                 bandDiv.append(bandImage);
-                // var bandImage = $("<img class = 'gif'>");
-                // bandImage.attr("src", response.data[i].images.fixed_height_still.url);
-                // bandImage.attr("data-animate", response.data[i].images.fixed_height.url);
-                // bandImage.attr("data-still", response.data[i].images.fixed_height_still.url);
-                // bandImage.attr("data-state", "still");
-                // bandImage.attr("data-state", "animate", response.data[i].images.fixed_height.url);
-                // bandDiv.append(bandImage);
-                $("#bands").append(bandDiv).append(p);
-                
-                
-                
-            
+                $("#bands").append(bandDiv).append(p); 
         }
     })
 })
 
 $(document).on("click", ".gif", function () {
-    console.log("gif clicked");
     var state = $(this).attr("data-state");
     if (state === "still") {
       $(this).attr("src", $(this).attr("data-animate"));
